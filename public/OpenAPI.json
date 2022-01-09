@@ -1,0 +1,5910 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "接口文档",
+    "contact": {},
+    "version": "版本号:0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://192.168.0.89:8082",
+      "description": "Inferred Url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "公建设施:公建管理",
+      "description": "Ob Facility Controller"
+    },
+    {
+      "name": "公建设施:出租信息",
+      "description": "Ob Facility Rent Info Controller"
+    },
+    {
+      "name": "公建设施:勘验记录",
+      "description": "Ob Facility Inquest Controller"
+    },
+    {
+      "name": "公建设施:对内移交记录",
+      "description": "Ob Facility Handover Inner Controller"
+    },
+    {
+      "name": "公建设施:对外移交记录",
+      "description": "Ob Facility Handover Controller"
+    },
+    {
+      "name": "公建设施:建设方案",
+      "description": "Ob Facility Build Plan Controller"
+    },
+    {
+      "name": "公建设施:建设需求",
+      "description": "Ob Facility Build Need Controller"
+    },
+    {
+      "name": "公建设施:核验记录",
+      "description": "Ob Facility Verify Controller"
+    },
+    {
+      "name": "公建设施:验收记录",
+      "description": "Ob Facility Check Result Controller"
+    },
+    {
+      "name": "公建设施附件",
+      "description": "Ob Facility File Controller"
+    },
+    {
+      "name": "开发商管理",
+      "description": "Ob Company Controller"
+    },
+    {
+      "name": "项目管理",
+      "description": "Ob Project Controller"
+    }
+  ],
+  "paths": {
+    "/ob_company/getCompanyById": {
+      "get": {
+        "tags": [
+          "开发商管理"
+        ],
+        "summary": "获取开发商信息",
+        "operationId": "getCompanyByIdUsingGET",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«ObCompanyBO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_company/list": {
+      "get": {
+        "tags": [
+          "开发商管理"
+        ],
+        "summary": "开发商列表",
+        "operationId": "listUsingGET",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«List«ObCompanyListBO»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/build_need": {
+      "put": {
+        "tags": [
+          "公建设施:建设需求"
+        ],
+        "summary": "根据公建设施id更新建设需求",
+        "operationId": "updateUsingPUT",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObFacilityBuildNeedUpdateParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«Void»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/build_need/{facilityId}": {
+      "get": {
+        "tags": [
+          "公建设施:建设需求"
+        ],
+        "summary": "根据公建设施id查询建设需求详情",
+        "operationId": "getByIdUsingGET",
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "path",
+            "description": "facilityId",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«建设需求»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/build_plan/getInfoList": {
+      "get": {
+        "tags": [
+          "公建设施:建设方案"
+        ],
+        "summary": "获取全部建设方案",
+        "operationId": "getInfoListUsingGET",
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "query",
+            "description": "公建设施id",
+            "required": true,
+            "style": "form",
+            "allowReserved": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«List«建设方案»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/build_plan/getLatestInfo": {
+      "get": {
+        "tags": [
+          "公建设施:建设方案"
+        ],
+        "summary": "获取最新建设方案",
+        "operationId": "getLatestInfoUsingGET",
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "query",
+            "description": "公建设施id",
+            "required": true,
+            "style": "form",
+            "allowReserved": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«建设方案»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/build_plan/save": {
+      "post": {
+        "tags": [
+          "公建设施:建设方案"
+        ],
+        "summary": "新增建设方案",
+        "operationId": "saveUsingPOST",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObFacilityBuildPlanAddParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«object»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/build_plan/{id}": {
+      "get": {
+        "tags": [
+          "公建设施:建设方案"
+        ],
+        "summary": "建设方案详情",
+        "operationId": "getByIdUsingGET_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«建设方案»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/check_result/getLatestInfo": {
+      "get": {
+        "tags": [
+          "公建设施:验收记录"
+        ],
+        "summary": "获取最新验收记录",
+        "operationId": "getLatestInfoUsingGET_1",
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "query",
+            "description": "公建设施id",
+            "required": true,
+            "style": "form",
+            "allowReserved": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«ObFacilityCheckResultLatestBO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/check_result/save": {
+      "post": {
+        "tags": [
+          "公建设施:验收记录"
+        ],
+        "summary": "新增验收记录",
+        "operationId": "saveUsingPOST_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObFacilityCheckResultAddParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«object»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/check_result/{id}": {
+      "get": {
+        "tags": [
+          "公建设施:验收记录"
+        ],
+        "summary": "详情",
+        "operationId": "getByIdUsingGET_2",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«验收记录»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility": {
+      "put": {
+        "tags": [
+          "公建设施:公建管理"
+        ],
+        "summary": "编辑",
+        "description": "编辑",
+        "operationId": "editUsingPUT",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObFacilityUpdateParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«Void»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "公建设施:公建管理"
+        ],
+        "summary": "新增",
+        "description": "新增",
+        "operationId": "addUsingPOST",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/批量新增公建设施参数类"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«Void»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility/exportTemplate": {
+      "get": {
+        "tags": [
+          "公建设施:公建管理"
+        ],
+        "summary": "公建设施导入Excel模板导出",
+        "operationId": "exportTemplateUsingGET",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«string»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility/facility_count": {
+      "get": {
+        "tags": [
+          "公建设施:公建管理"
+        ],
+        "summary": "开发商公建数量统计接口",
+        "operationId": "getFacilityCountForDeveloperUsingGET",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«公建数量统计»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility/getDeptByFacilityType": {
+      "get": {
+        "tags": [
+          "公建设施:公建管理"
+        ],
+        "summary": "根据公建设施类型查询接收部门",
+        "description": "根据公建设施类型查询接收部门",
+        "operationId": "getDeptByFacilityTypeUsingGET",
+        "parameters": [
+          {
+            "name": "facilityType",
+            "in": "query",
+            "description": "facilityType",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«List«SysDept»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility/getProcdefIdByDeptId/{deptId}": {
+      "get": {
+        "tags": [
+          "公建设施:公建管理"
+        ],
+        "summary": "根据接收部门查询审批流id",
+        "description": "根据接收部门查询审批流id",
+        "operationId": "getProcdefIdByDeptIdUsingGET",
+        "parameters": [
+          {
+            "name": "deptId",
+            "in": "path",
+            "description": "deptId",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«string»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility/importInfo": {
+      "post": {
+        "tags": [
+          "公建设施:公建管理"
+        ],
+        "summary": "Excel导入公建设施信息",
+        "operationId": "importInfoUsingPOST",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "file"
+                ],
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "description": "file",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«object»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility/list": {
+      "get": {
+        "tags": [
+          "公建设施:公建管理"
+        ],
+        "summary": "列表",
+        "description": "列表",
+        "operationId": "listUsingGET_1",
+        "parameters": [
+          {
+            "name": "beCompleteFlag",
+            "in": "query",
+            "description": "待审核标识:0.已审核 1.待审核 不传.查全部",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "deptId",
+            "in": "query",
+            "description": "使用部门id",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "facilityName",
+            "in": "query",
+            "description": "公建设施名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "facilityType",
+            "in": "query",
+            "description": "公建设施类型",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "totalAreaMax",
+            "in": "query",
+            "description": "面积区间上限",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "number",
+              "format": "bigdecimal"
+            }
+          },
+          {
+            "name": "totalAreaMin",
+            "in": "query",
+            "description": "面积区间下限",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "number",
+              "format": "bigdecimal"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "size",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«PageResult«公建设施列表实体类»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility/listByProjectId/{projectId}": {
+      "get": {
+        "tags": [
+          "公建设施:公建管理"
+        ],
+        "summary": "项目下公建设施列表",
+        "description": "项目下公建设施列表",
+        "operationId": "getListByProjectUsingGET",
+        "parameters": [
+          {
+            "name": "beCompleteFlag",
+            "in": "query",
+            "description": "待审核标识:0.已审核 1.待审核 不传.查全部",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "deptId",
+            "in": "query",
+            "description": "使用部门id",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "facilityName",
+            "in": "query",
+            "description": "公建设施名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "facilityType",
+            "in": "query",
+            "description": "公建设施类型",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "totalAreaMax",
+            "in": "query",
+            "description": "面积区间上限",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "number",
+              "format": "bigdecimal"
+            }
+          },
+          {
+            "name": "totalAreaMin",
+            "in": "query",
+            "description": "面积区间下限",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "number",
+              "format": "bigdecimal"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "size",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "projectId",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«PageResult«公建设施列表实体类»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility/saveFacilityTypeDept": {
+      "post": {
+        "tags": [
+          "公建设施:公建管理"
+        ],
+        "summary": "添加公建设施类型对应接收部门",
+        "description": "添加公建设施类型对应接收部门",
+        "operationId": "saveFacilityTypeDeptUsingPOST",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObFacilityTypeDeptAddParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«object»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility/updateAlterable": {
+      "put": {
+        "tags": [
+          "公建设施:公建管理"
+        ],
+        "summary": "公建设施可修改字段修改",
+        "operationId": "updateAlterableUsingPUT",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObFacilityAlterableUpdateParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«object»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility/{ids}": {
+      "delete": {
+        "tags": [
+          "公建设施:公建管理"
+        ],
+        "summary": "删除",
+        "description": "删除",
+        "operationId": "removeUsingDELETE",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "path",
+            "description": "ids",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«Void»"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility/{id}": {
+      "get": {
+        "tags": [
+          "公建设施:公建管理"
+        ],
+        "summary": "详情",
+        "description": "详情",
+        "operationId": "getInfoUsingGET",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«公建设施实体类»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/file/all/{facilityId}": {
+      "get": {
+        "tags": [
+          "公建设施附件"
+        ],
+        "summary": "查询公建所有附件",
+        "operationId": "getAllFileUsingGET",
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "path",
+            "description": "facilityId",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«List«ObFacilityFileBO»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/file/handover/file/{facilityId}": {
+      "get": {
+        "tags": [
+          "公建设施附件"
+        ],
+        "summary": "移交清单附件查询",
+        "operationId": "getHandoverFileUsingGET",
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "path",
+            "description": "facilityId",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«List«ObFacilityFileBO»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/file/handover/uploadFile": {
+      "put": {
+        "tags": [
+          "公建设施附件"
+        ],
+        "summary": "移交清单附件更新",
+        "operationId": "uploadHandoverFileUsingPUT",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObFacilityFileListAddParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«object»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/file/meeting/getFile": {
+      "get": {
+        "tags": [
+          "公建设施附件"
+        ],
+        "summary": "会议纪要根据类型和公建设施id查询",
+        "operationId": "getFileUsingGET",
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "query",
+            "description": "公建设施id",
+            "required": true,
+            "style": "form",
+            "allowReserved": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«List«ObFacilityFileBO»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/file/meeting/updateFile": {
+      "put": {
+        "tags": [
+          "公建设施附件"
+        ],
+        "summary": "会议纪要更新文件",
+        "operationId": "updateFileUsingPUT",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObFacilityFileUpdateParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«object»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/file/{id}": {
+      "get": {
+        "tags": [
+          "公建设施附件"
+        ],
+        "summary": "根据id查询附件详情",
+        "operationId": "getUsingGET",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«ObFacilityFileBO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility_handover": {
+      "put": {
+        "tags": [
+          "公建设施:对外移交记录"
+        ],
+        "summary": "更新移交记录",
+        "operationId": "updateUsingPUT_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObFacilityHandoverUpdateParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«object»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility_handover/getByFacilityId/{facilityId}": {
+      "get": {
+        "tags": [
+          "公建设施:对外移交记录"
+        ],
+        "summary": "通过设施id获取移交记录",
+        "operationId": "getByFacilityIdUsingGET",
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "path",
+            "description": "设施id",
+            "required": true,
+            "style": "simple",
+            "allowReserved": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«ObFacilityHandoverBO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility_handover/getById": {
+      "get": {
+        "tags": [
+          "公建设施:对外移交记录"
+        ],
+        "summary": "获取移交记录",
+        "operationId": "getByIdUsingGET_3",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id",
+            "required": true,
+            "style": "form",
+            "allowReserved": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«ObFacilityHandoverBO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/handover/inner": {
+      "put": {
+        "tags": [
+          "公建设施:对内移交记录"
+        ],
+        "summary": "更新移交记录",
+        "operationId": "updateUsingPUT_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObFacilityHandoverInnerUpdateParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«object»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/handover/inner/getByFacilityId/{facilityId}": {
+      "get": {
+        "tags": [
+          "公建设施:对内移交记录"
+        ],
+        "summary": "通过设施id获取移交记录",
+        "operationId": "getByFacilityIdUsingGET_1",
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "path",
+            "description": "设施id",
+            "required": true,
+            "style": "simple",
+            "allowReserved": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«ObFacilityHandoverInnerBO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/handover/inner/getById": {
+      "get": {
+        "tags": [
+          "公建设施:对内移交记录"
+        ],
+        "summary": "获取移交记录",
+        "operationId": "getByIdUsingGET_4",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id",
+            "required": true,
+            "style": "form",
+            "allowReserved": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«ObFacilityHandoverInnerBO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility_inquest/getLatestInfo": {
+      "get": {
+        "tags": [
+          "公建设施:勘验记录"
+        ],
+        "summary": "获取最新勘验记录",
+        "operationId": "getLatestInfoUsingGET_2",
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "query",
+            "description": "公建设施id",
+            "required": true,
+            "style": "form",
+            "allowReserved": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«ObFacilityInquestBO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility_inquest/listByFacility/{facilityId}": {
+      "get": {
+        "tags": [
+          "公建设施:勘验记录"
+        ],
+        "summary": "通过公建设施id获取勘验记录",
+        "operationId": "getByFacilityIdUsingGET_2",
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "path",
+            "description": "设施id",
+            "required": true,
+            "style": "simple",
+            "allowReserved": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«List«ObFacilityInquestBO»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility_inquest/save": {
+      "post": {
+        "tags": [
+          "公建设施:勘验记录"
+        ],
+        "summary": "新增勘验记录",
+        "operationId": "saveUsingPOST_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObFacilityInquestAddParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«object»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility_inquest/{id}": {
+      "get": {
+        "tags": [
+          "公建设施:勘验记录"
+        ],
+        "summary": "获取勘验记录",
+        "operationId": "getByIdUsingGET_5",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "style": "simple",
+            "allowReserved": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«ObFacilityInquestBO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility_rent_info/getByFacilityId": {
+      "get": {
+        "tags": [
+          "公建设施:出租信息"
+        ],
+        "summary": "通过设施id获取出租信息",
+        "operationId": "getByFacilityIdUsingGET_3",
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "query",
+            "description": "设施id",
+            "required": true,
+            "style": "form",
+            "allowReserved": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«ObFacilityRentInfoBO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility_rent_info/getById": {
+      "get": {
+        "tags": [
+          "公建设施:出租信息"
+        ],
+        "summary": "获取出租信息",
+        "operationId": "getByIdUsingGET_6",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "id",
+            "required": true,
+            "style": "form",
+            "allowReserved": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«ObFacilityRentInfoBO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_facility_rent_info/update": {
+      "put": {
+        "tags": [
+          "公建设施:出租信息"
+        ],
+        "summary": "更新出租信息",
+        "operationId": "updateUsingPUT_3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObFacilityRentInfoUpdateParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«object»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/verify/latest": {
+      "get": {
+        "tags": [
+          "公建设施:核验记录"
+        ],
+        "summary": "查询最新核验记录",
+        "operationId": "getLatestInfoUsingGET_3",
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "query",
+            "description": "facilityId",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«ObFacilityVerifyBO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/facility/verify/save": {
+      "post": {
+        "tags": [
+          "公建设施:核验记录"
+        ],
+        "summary": "新增核验记录",
+        "operationId": "saveUsingPOST_3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObFacilityVerifyAddParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«object»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_project/delete": {
+      "delete": {
+        "tags": [
+          "项目管理"
+        ],
+        "summary": "删除项目",
+        "operationId": "deleteUsingDELETE",
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "项目id列表",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "allowReserved": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«int»"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_project/detail": {
+      "get": {
+        "tags": [
+          "项目管理"
+        ],
+        "summary": "项目详情",
+        "operationId": "deleteUsingGET",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "项目id",
+            "required": true,
+            "style": "form",
+            "allowReserved": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«ObProjectBO»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_project/list": {
+      "get": {
+        "tags": [
+          "项目管理"
+        ],
+        "summary": "项目列表查询",
+        "operationId": "listUsingGET_2",
+        "parameters": [
+          {
+            "name": "dataScope",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "developerId",
+            "in": "query",
+            "description": "关联开发商id",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "minimum": 1,
+              "exclusiveMinimum": false,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "projectName",
+            "in": "query",
+            "description": "项目名称",
+            "required": false,
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "页大小",
+            "required": true,
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«PageResult«ObProjectListBO»»"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_project/save": {
+      "post": {
+        "tags": [
+          "项目管理"
+        ],
+        "summary": "新增项目",
+        "operationId": "saveUsingPOST_4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObProjectSaveDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«long»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    },
+    "/ob_project/update": {
+      "put": {
+        "tags": [
+          "项目管理"
+        ],
+        "summary": "更新项目",
+        "operationId": "updateUsingPUT_4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObProjectUpdateDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseResult«object»"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Authorization": [
+              "global"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ObCompanyBO": {
+        "title": "ObCompanyBO",
+        "type": "object",
+        "properties": {
+          "businessAddress": {
+            "type": "string",
+            "description": "经营地址"
+          },
+          "businessLicense": {
+            "type": "string",
+            "description": "营业执照"
+          },
+          "closeDate": {
+            "type": "string",
+            "description": "经营截止日期",
+            "format": "date-time"
+          },
+          "companyName": {
+            "type": "string",
+            "description": "企业名称"
+          },
+          "creditCode": {
+            "type": "string",
+            "description": "统一社会信用代码"
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键",
+            "format": "int64"
+          },
+          "legalPersonName": {
+            "type": "string",
+            "description": "法人名称"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "法人手机号"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "用户id",
+            "format": "int64"
+          }
+        }
+      },
+      "ObCompanyListBO": {
+        "title": "ObCompanyListBO",
+        "type": "object",
+        "properties": {
+          "businessAddress": {
+            "type": "string",
+            "description": "经营地址"
+          },
+          "businessLicense": {
+            "type": "string",
+            "description": "营业执照"
+          },
+          "closeDate": {
+            "type": "string",
+            "description": "经营截止日期",
+            "format": "date-time"
+          },
+          "companyName": {
+            "type": "string",
+            "description": "企业名称"
+          },
+          "creditCode": {
+            "type": "string",
+            "description": "统一社会信用代码"
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键",
+            "format": "int64"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "description": "法人手机号"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "用户id",
+            "format": "int64"
+          }
+        }
+      },
+      "ObFacilityAddParam": {
+        "title": "ObFacilityAddParam",
+        "required": [
+          "developerId",
+          "facilityType",
+          "projectId",
+          "receiveDeptId"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "公建地址"
+          },
+          "bedNum": {
+            "type": "integer",
+            "description": "床位数（张）",
+            "format": "int32"
+          },
+          "checkDate": {
+            "type": "string",
+            "description": "验收日期",
+            "format": "date"
+          },
+          "circulateDeptId": {
+            "type": "integer",
+            "description": "流转部门",
+            "format": "int64"
+          },
+          "cityName": {
+            "type": "string",
+            "description": "市"
+          },
+          "communityRecordNo": {
+            "type": "string",
+            "description": "小区备案号"
+          },
+          "contactPeople": {
+            "type": "string",
+            "description": "联系人"
+          },
+          "contactPhone": {
+            "type": "string",
+            "description": "联系电话"
+          },
+          "countyName": {
+            "type": "string",
+            "description": "县（市）"
+          },
+          "developerId": {
+            "type": "integer",
+            "description": "开发商id",
+            "format": "int64"
+          },
+          "elevatorType": {
+            "type": "string",
+            "description": "电梯（填有或无）"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "截止日期",
+            "format": "date"
+          },
+          "facilityName": {
+            "type": "string",
+            "description": "公建设施名称"
+          },
+          "facilityType": {
+            "type": "integer",
+            "description": "公建设施类型id",
+            "format": "int32"
+          },
+          "floorNo": {
+            "type": "string",
+            "description": "楼层"
+          },
+          "handoverDate": {
+            "type": "string",
+            "description": "移交日期",
+            "format": "date"
+          },
+          "institutionType": {
+            "type": "string",
+            "description": "机构性质（填公办或民办）"
+          },
+          "jurisdiction": {
+            "type": "string",
+            "description": "辖区"
+          },
+          "landUse": {
+            "type": "integer",
+            "description": "土地用途",
+            "format": "int32"
+          },
+          "latitude": {
+            "type": "string",
+            "description": "纬度"
+          },
+          "longitude": {
+            "type": "string",
+            "description": "经度"
+          },
+          "procinst": {
+            "description": "审批参数",
+            "$ref": "#/components/schemas/审批实例启动参数"
+          },
+          "projectId": {
+            "type": "integer",
+            "description": "项目id",
+            "format": "int64"
+          },
+          "propertyRightNo": {
+            "type": "string",
+            "description": "产权证号"
+          },
+          "propertyType": {
+            "type": "string",
+            "description": "产权性质（填自有或租赁）"
+          },
+          "receiveDeptId": {
+            "type": "integer",
+            "description": "接收部门",
+            "format": "int64"
+          },
+          "registerType": {
+            "type": "string",
+            "description": "登记类型（填事业、民非或企业）"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "runType": {
+            "type": "string",
+            "description": "运营方式（填公建民营或民营）"
+          },
+          "setUpDate": {
+            "type": "string",
+            "description": "立项日期",
+            "format": "date"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "开始日期",
+            "format": "date"
+          },
+          "state": {
+            "type": "integer",
+            "description": "公建设施状态",
+            "format": "int32"
+          },
+          "street": {
+            "type": "string",
+            "description": "乡（镇、街道）"
+          },
+          "totalArea": {
+            "type": "number",
+            "description": "面积",
+            "format": "bigdecimal"
+          },
+          "transferContractNo": {
+            "type": "string",
+            "description": "出让合同号"
+          }
+        }
+      },
+      "ObFacilityAlterableUpdateParam": {
+        "title": "ObFacilityAlterableUpdateParam",
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "landUse": {
+            "type": "integer",
+            "description": "土地用途",
+            "format": "int32"
+          },
+          "state": {
+            "type": "integer",
+            "description": "公建设施状态",
+            "format": "int32"
+          }
+        }
+      },
+      "ObFacilityBuildNeedUpdateParam": {
+        "title": "ObFacilityBuildNeedUpdateParam",
+        "required": [
+          "facilityId"
+        ],
+        "type": "object",
+        "properties": {
+          "buildNeed": {
+            "type": "string",
+            "description": "建设需求"
+          },
+          "content": {
+            "type": "string",
+            "description": "需求内容"
+          },
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "files": {
+            "type": "array",
+            "description": "附件",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFileAddParam"
+            }
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          }
+        }
+      },
+      "ObFacilityBuildPlanAddParam": {
+        "title": "ObFacilityBuildPlanAddParam",
+        "required": [
+          "facilityId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "详细内容"
+          },
+          "developer": {
+            "type": "string",
+            "description": "开发商名称"
+          },
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "files": {
+            "type": "array",
+            "description": "附件",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFileAddParam"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "建设方案名称"
+          },
+          "projectName": {
+            "type": "string",
+            "description": "项目名称"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "writeDate": {
+            "type": "string",
+            "description": "填写日期",
+            "format": "date"
+          }
+        }
+      },
+      "ObFacilityCheckResultAddParam": {
+        "title": "ObFacilityCheckResultAddParam",
+        "required": [
+          "facilityId",
+          "result"
+        ],
+        "type": "object",
+        "properties": {
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "files": {
+            "type": "array",
+            "description": "附件",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFileAddParam"
+            }
+          },
+          "result": {
+            "type": "integer",
+            "description": "验收结果（1:合格，0:不合格）",
+            "format": "int32"
+          }
+        }
+      },
+      "ObFacilityCheckResultLatestBO": {
+        "title": "ObFacilityCheckResultLatestBO",
+        "required": [
+          "createBy",
+          "createTime",
+          "facilityId",
+          "files",
+          "id",
+          "result",
+          "updateBy",
+          "updateTime"
+        ],
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "integer",
+            "description": "创建人",
+            "format": "int64"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "deptId": {
+            "type": "integer",
+            "description": "部门id",
+            "format": "int64"
+          },
+          "deptName": {
+            "type": "string",
+            "description": "部门名称"
+          },
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "files": {
+            "type": "array",
+            "description": "附件",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFile"
+            }
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "nickname": {
+            "type": "string",
+            "description": "用户昵称"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号码"
+          },
+          "result": {
+            "type": "integer",
+            "description": "验收结果（合格，不合格）",
+            "format": "int32"
+          },
+          "updateBy": {
+            "type": "integer",
+            "description": "更新人",
+            "format": "int64"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": "integer",
+            "description": "验收人用户id",
+            "format": "int64"
+          }
+        }
+      },
+      "ObFacilityFile": {
+        "title": "ObFacilityFile",
+        "required": [
+          "createBy",
+          "createTime",
+          "facilityId",
+          "id",
+          "name",
+          "relateId",
+          "relateType",
+          "type",
+          "updateBy",
+          "updateTime",
+          "url",
+          "validFlag"
+        ],
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "integer",
+            "description": "创建人",
+            "format": "int64"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64",
+            "example": 1
+          },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "文件名"
+          },
+          "relateId": {
+            "type": "integer",
+            "description": "关联id",
+            "format": "int64"
+          },
+          "relateType": {
+            "type": "string",
+            "description": "目标类型：\n            1.合同附件\n            2.公建设施建设标准\n            3.建设方案\n            4.会议纪要\n            5.质量合格表\n            6.核实附表\n            7.土地出让（划拨）合同；\n            8.规划设计条件通知书；\n            9.总平面图、立面图；\n            10.公共设施部分建筑施工图；\n            11.竣工图；\n            12.计入容积率面积测绘成果书；\n            13.房屋建筑面积测绘成果书；\n            14.建筑工程类核实附表；\n            15.建设规划核实确认书（规划许可证）；\n            16.建设工程竣工测绘成果报告；\n            17.竣工验收备案表\n            18.勘验记录"
+          },
+          "type": {
+            "type": "string",
+            "description": "文件格式类型"
+          },
+          "updateBy": {
+            "type": "integer",
+            "description": "修改人",
+            "format": "int64"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间",
+            "format": "date-time"
+          },
+          "url": {
+            "type": "string",
+            "description": "文件路径"
+          },
+          "validFlag": {
+            "type": "integer",
+            "description": "是否有效，1表示有效，0表示无效",
+            "format": "int32"
+          }
+        }
+      },
+      "ObFacilityFileAddParam": {
+        "title": "ObFacilityFileAddParam",
+        "required": [
+          "name",
+          "relateType",
+          "type",
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "文件名"
+          },
+          "relateType": {
+            "type": "string",
+            "description": "附件类型"
+          },
+          "type": {
+            "type": "string",
+            "description": "文件格式类型"
+          },
+          "url": {
+            "type": "string",
+            "description": "文件路径"
+          }
+        }
+      },
+      "ObFacilityFileBO": {
+        "title": "ObFacilityFileBO",
+        "required": [
+          "createBy",
+          "createTime",
+          "facilityId",
+          "id",
+          "name",
+          "relateId",
+          "relateType",
+          "type",
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "integer",
+            "description": "创建人",
+            "format": "int64"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64",
+            "example": 1
+          },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "文件名"
+          },
+          "relateId": {
+            "type": "integer",
+            "description": "关联id",
+            "format": "int64"
+          },
+          "relateType": {
+            "type": "string",
+            "description": "目标类型：\n1. 合同附件\n2. 公建设施建设标准\n3. 建设方案\n4. 会议纪要\n5. 质量合格表\n6. 核实附表\n7. 土地出让（划拨）合同；\n8. 规划设计条件通知书；\n9. 总平面图、立面图；\n10. 公共设施部分建筑施工图；\n11. 竣工图；\n12. 计入容积率面积测绘成果书；\n13. 房屋建筑面积测绘成果书；\n14. 建筑工程类核实附表；\n15. 建设规划核实确认书（规划许可证）；\n16. 建设工程竣工测绘成果报告；\n17. 竣工验收备案表\n18. 勘验记录"
+          },
+          "type": {
+            "type": "string",
+            "description": "文件格式类型"
+          },
+          "url": {
+            "type": "string",
+            "description": "文件路径"
+          }
+        }
+      },
+      "ObFacilityFileListAddParam": {
+        "title": "ObFacilityFileListAddParam",
+        "required": [
+          "facilityId"
+        ],
+        "type": "object",
+        "properties": {
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "files": {
+            "type": "array",
+            "description": "附件列表",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFileAddParam"
+            }
+          }
+        }
+      },
+      "ObFacilityFileUpdateParam": {
+        "title": "ObFacilityFileUpdateParam",
+        "required": [
+          "facilityId"
+        ],
+        "type": "object",
+        "properties": {
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "files": {
+            "type": "array",
+            "description": "上传附件",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFileAddParam"
+            }
+          }
+        }
+      },
+      "ObFacilityHandoverBO": {
+        "title": "ObFacilityHandoverBO",
+        "required": [
+          "address",
+          "area",
+          "buildDeptId",
+          "handoverDate",
+          "id",
+          "landUse",
+          "useDeptId"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "地址"
+          },
+          "area": {
+            "type": "number",
+            "description": "面积/m²",
+            "format": "bigdecimal"
+          },
+          "buildDeptId": {
+            "type": "integer",
+            "description": "建设单位",
+            "format": "int64"
+          },
+          "files": {
+            "type": "array",
+            "description": "附件",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFile"
+            }
+          },
+          "handoverDate": {
+            "type": "string",
+            "description": "移交日期",
+            "format": "date"
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "landUse": {
+            "type": "integer",
+            "description": "土地用途",
+            "format": "int32"
+          },
+          "useDeptId": {
+            "type": "integer",
+            "description": "使用管理单位",
+            "format": "int64"
+          }
+        }
+      },
+      "ObFacilityHandoverInnerBO": {
+        "title": "ObFacilityHandoverInnerBO",
+        "required": [
+          "address",
+          "area",
+          "buildDeptId",
+          "handoverDate",
+          "id",
+          "landUse",
+          "useDeptId"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "地址"
+          },
+          "area": {
+            "type": "number",
+            "description": "面积/m²",
+            "format": "bigdecimal"
+          },
+          "buildDeptId": {
+            "type": "integer",
+            "description": "建设单位",
+            "format": "int64"
+          },
+          "files": {
+            "type": "array",
+            "description": "附件",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFile"
+            }
+          },
+          "handoverDate": {
+            "type": "string",
+            "description": "移交日期",
+            "format": "date"
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "landUse": {
+            "type": "integer",
+            "description": "土地用途",
+            "format": "int32"
+          },
+          "useDeptId": {
+            "type": "integer",
+            "description": "使用管理单位",
+            "format": "int64"
+          }
+        }
+      },
+      "ObFacilityHandoverInnerUpdateParam": {
+        "title": "ObFacilityHandoverInnerUpdateParam",
+        "required": [
+          "facilityId"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "地址"
+          },
+          "area": {
+            "type": "number",
+            "description": "面积/m²",
+            "format": "bigdecimal"
+          },
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "files": {
+            "type": "array",
+            "description": "上传附件",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFileAddParam"
+            }
+          },
+          "handoverDate": {
+            "type": "string",
+            "description": "移交日期",
+            "format": "date"
+          },
+          "useProperty": {
+            "type": "string",
+            "description": "使用属性"
+          }
+        }
+      },
+      "ObFacilityHandoverUpdateParam": {
+        "title": "ObFacilityHandoverUpdateParam",
+        "required": [
+          "facilityId"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "地址"
+          },
+          "area": {
+            "type": "number",
+            "description": "面积/m²",
+            "format": "bigdecimal"
+          },
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "files": {
+            "type": "array",
+            "description": "上传附件",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFileAddParam"
+            }
+          },
+          "handoverDate": {
+            "type": "string",
+            "description": "移交日期",
+            "format": "date"
+          },
+          "useProperty": {
+            "type": "string",
+            "description": "使用属性"
+          }
+        }
+      },
+      "ObFacilityInquestAddParam": {
+        "title": "ObFacilityInquestAddParam",
+        "required": [
+          "facilityId",
+          "inquestStatus"
+        ],
+        "type": "object",
+        "properties": {
+          "currentStatus": {
+            "type": "string",
+            "description": "目前状况"
+          },
+          "deptIds": {
+            "type": "array",
+            "description": "相关部门",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "facilityValue": {
+            "type": "number",
+            "description": "公建设施建筑价值",
+            "format": "bigdecimal"
+          },
+          "files": {
+            "type": "array",
+            "description": "附件",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFileAddParam"
+            }
+          },
+          "inquestAddress": {
+            "type": "string",
+            "description": "勘验地点"
+          },
+          "inquestDate": {
+            "type": "string",
+            "description": "勘验时间",
+            "format": "date"
+          },
+          "inquestStatus": {
+            "type": "integer",
+            "description": "勘验结果 1.合格 2.不合格",
+            "format": "int32"
+          },
+          "landUse": {
+            "type": "integer",
+            "description": "土地用途",
+            "format": "int32"
+          },
+          "publishDate": {
+            "type": "string",
+            "description": "发布日期",
+            "format": "date"
+          },
+          "totalArea": {
+            "type": "number",
+            "description": "面积/m²",
+            "format": "bigdecimal"
+          }
+        }
+      },
+      "ObFacilityInquestBO": {
+        "title": "ObFacilityInquestBO",
+        "required": [
+          "address",
+          "deptList",
+          "facilityId",
+          "id",
+          "inquestAddress",
+          "inquestDate",
+          "projectName",
+          "publishDate",
+          "totalArea"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "公建地址"
+          },
+          "currentStatus": {
+            "type": "string",
+            "description": "目前状况"
+          },
+          "deptList": {
+            "type": "array",
+            "description": "相关部门",
+            "items": {
+              "$ref": "#/components/schemas/SysDept"
+            }
+          },
+          "developerId": {
+            "type": "integer",
+            "description": "关联开发商id",
+            "format": "int64"
+          },
+          "developerName": {
+            "type": "string",
+            "description": "关联开发商名称"
+          },
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "facilityValue": {
+            "type": "number",
+            "description": "公建设施建筑价值",
+            "format": "bigdecimal"
+          },
+          "files": {
+            "type": "array",
+            "description": "附件",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFile"
+            }
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "inquestAddress": {
+            "type": "string",
+            "description": "勘验地点"
+          },
+          "inquestDate": {
+            "type": "string",
+            "description": "勘验时间",
+            "format": "date"
+          },
+          "inquestStatus": {
+            "type": "integer",
+            "description": "勘验结果 1.合格 2.不合格",
+            "format": "int32"
+          },
+          "landName": {
+            "type": "string",
+            "description": "地块名称",
+            "example": "大地块"
+          },
+          "landUse": {
+            "type": "integer",
+            "description": "土地用途",
+            "format": "int32"
+          },
+          "projectName": {
+            "type": "string",
+            "description": "项目名称"
+          },
+          "publishDate": {
+            "type": "string",
+            "description": "发布日期",
+            "format": "date"
+          },
+          "totalArea": {
+            "type": "number",
+            "description": "面积",
+            "format": "bigdecimal"
+          }
+        }
+      },
+      "ObFacilityRentInfoBO": {
+        "title": "ObFacilityRentInfoBO",
+        "type": "object",
+        "properties": {
+          "actualPayCountry": {
+            "type": "number",
+            "description": "实缴国库金额（元/月）",
+            "format": "bigdecimal"
+          },
+          "address": {
+            "type": "string",
+            "description": "坐落地址"
+          },
+          "assessPrice": {
+            "type": "number",
+            "description": "评估价格（元/月）",
+            "format": "bigdecimal"
+          },
+          "contactPeople": {
+            "type": "string",
+            "description": "承租方信息：联系人"
+          },
+          "contactPhone": {
+            "type": "string",
+            "description": "承租方信息：联系电话"
+          },
+          "deptId": {
+            "type": "integer",
+            "description": "权属单位",
+            "format": "int64"
+          },
+          "deptName": {
+            "type": "string",
+            "description": "权属单位名称"
+          },
+          "estateArea": {
+            "type": "number",
+            "description": "房产证信息：面积",
+            "format": "bigdecimal"
+          },
+          "estateNo": {
+            "type": "string",
+            "description": "房产证信息：房产证号"
+          },
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "financeCheckTime": {
+            "type": "string",
+            "description": "招租信息：财政审批时间",
+            "format": "date"
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "landArea": {
+            "type": "number",
+            "description": "土地证信息：面积",
+            "format": "bigdecimal"
+          },
+          "landNo": {
+            "type": "string",
+            "description": "土地证信息：土地证号"
+          },
+          "landUse": {
+            "type": "integer",
+            "description": "土地用途",
+            "format": "int32"
+          },
+          "landUseName": {
+            "type": "string",
+            "description": "土地用途名称"
+          },
+          "lessee": {
+            "type": "string",
+            "description": "承租方信息：承租人（单位）"
+          },
+          "needPayCountry": {
+            "type": "number",
+            "description": "应缴国库金额（元/月）",
+            "format": "bigdecimal"
+          },
+          "payCountryTime": {
+            "type": "string",
+            "description": "上缴国库时间",
+            "format": "date"
+          },
+          "rentFloorPrice": {
+            "type": "number",
+            "description": "招租信息：招租底价（元/月）",
+            "format": "bigdecimal"
+          },
+          "rentFromTime": {
+            "type": "string",
+            "description": "租赁期限：开始时间",
+            "format": "date"
+          },
+          "rentPlatform": {
+            "type": "string",
+            "description": "招租信息：招租信息公告平台"
+          },
+          "rentPrice": {
+            "type": "number",
+            "description": "含税租金（元/月）",
+            "format": "bigdecimal"
+          },
+          "rentTax": {
+            "type": "number",
+            "description": "税（费）金（元/月）",
+            "format": "bigdecimal"
+          },
+          "rentToTime": {
+            "type": "string",
+            "description": "租赁期限：结束时间",
+            "format": "date"
+          },
+          "rentType": {
+            "type": "integer",
+            "description": "招租信息：招租方式",
+            "format": "int32"
+          },
+          "totalArea": {
+            "type": "number",
+            "description": "建筑面积",
+            "format": "bigdecimal"
+          }
+        }
+      },
+      "ObFacilityRentInfoUpdateParam": {
+        "title": "ObFacilityRentInfoUpdateParam",
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "actualPayCountry": {
+            "type": "number",
+            "description": "实缴国库金额（元/月）",
+            "format": "bigdecimal"
+          },
+          "address": {
+            "type": "string",
+            "description": "坐落地址"
+          },
+          "assessPrice": {
+            "type": "number",
+            "description": "评估价格（元/月）",
+            "format": "bigdecimal"
+          },
+          "contactPeople": {
+            "type": "string",
+            "description": "承租方信息：联系人"
+          },
+          "contactPhone": {
+            "type": "string",
+            "description": "承租方信息：联系电话"
+          },
+          "deptId": {
+            "type": "integer",
+            "description": "权属单位",
+            "format": "int64"
+          },
+          "estateArea": {
+            "type": "number",
+            "description": "房产证信息：面积",
+            "format": "bigdecimal"
+          },
+          "estateNo": {
+            "type": "string",
+            "description": "房产证信息：房产证号"
+          },
+          "financeCheckTime": {
+            "type": "string",
+            "description": "招租信息：财政审批时间",
+            "format": "date"
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "landArea": {
+            "type": "number",
+            "description": "土地证信息：面积",
+            "format": "bigdecimal"
+          },
+          "landNo": {
+            "type": "string",
+            "description": "土地证信息：土地证号"
+          },
+          "landUse": {
+            "type": "integer",
+            "description": "土地用途",
+            "format": "int32"
+          },
+          "lessee": {
+            "type": "string",
+            "description": "承租方信息：承租人（单位）"
+          },
+          "needPayCountry": {
+            "type": "number",
+            "description": "应缴国库金额（元/月）",
+            "format": "bigdecimal"
+          },
+          "payCountryTime": {
+            "type": "string",
+            "description": "上缴国库时间",
+            "format": "date"
+          },
+          "rentFloorPrice": {
+            "type": "number",
+            "description": "招租信息：招租底价（元/月）",
+            "format": "bigdecimal"
+          },
+          "rentFromTime": {
+            "type": "string",
+            "description": "租赁期限：开始时间",
+            "format": "date"
+          },
+          "rentPlatform": {
+            "type": "string",
+            "description": "招租信息：招租信息公告平台"
+          },
+          "rentPrice": {
+            "type": "number",
+            "description": "含税租金（元/月）",
+            "format": "bigdecimal"
+          },
+          "rentTax": {
+            "type": "number",
+            "description": "税（费）金（元/月）",
+            "format": "bigdecimal"
+          },
+          "rentToTime": {
+            "type": "string",
+            "description": "租赁期限：结束时间",
+            "format": "date"
+          },
+          "rentType": {
+            "type": "integer",
+            "description": "招租信息：招租方式",
+            "format": "int32"
+          },
+          "totalArea": {
+            "type": "number",
+            "description": "建筑面积",
+            "format": "bigdecimal"
+          }
+        }
+      },
+      "ObFacilityTypeDeptAddParam": {
+        "title": "ObFacilityTypeDeptAddParam",
+        "required": [
+          "deptIds",
+          "facilityType"
+        ],
+        "type": "object",
+        "properties": {
+          "deptIds": {
+            "type": "array",
+            "description": "部门id列表",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "facilityType": {
+            "type": "integer",
+            "description": "公建设施类型",
+            "format": "int32"
+          }
+        }
+      },
+      "ObFacilityUpdateParam": {
+        "title": "ObFacilityUpdateParam",
+        "required": [
+          "facilityType",
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "公建地址"
+          },
+          "bedNum": {
+            "type": "integer",
+            "description": "床位数（张）",
+            "format": "int32"
+          },
+          "checkDate": {
+            "type": "string",
+            "description": "验收日期",
+            "format": "date"
+          },
+          "circulateDeptId": {
+            "type": "integer",
+            "description": "流转部门",
+            "format": "int64"
+          },
+          "cityName": {
+            "type": "string",
+            "description": "市"
+          },
+          "communityRecordNo": {
+            "type": "string",
+            "description": "小区备案号"
+          },
+          "contactPeople": {
+            "type": "string",
+            "description": "联系人"
+          },
+          "contactPhone": {
+            "type": "string",
+            "description": "联系电话"
+          },
+          "countyName": {
+            "type": "string",
+            "description": "县（市）"
+          },
+          "developerId": {
+            "type": "integer",
+            "description": "开发商id",
+            "format": "int64"
+          },
+          "elevatorType": {
+            "type": "string",
+            "description": "电梯（填有或无）"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "截止日期",
+            "format": "date"
+          },
+          "facilityName": {
+            "type": "string",
+            "description": "公建设施名称"
+          },
+          "facilityType": {
+            "type": "integer",
+            "description": "公建设施类型id",
+            "format": "int32"
+          },
+          "floorNo": {
+            "type": "string",
+            "description": "楼层"
+          },
+          "handoverDate": {
+            "type": "string",
+            "description": "移交日期",
+            "format": "date"
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "institutionType": {
+            "type": "string",
+            "description": "机构性质（填公办或民办）"
+          },
+          "jurisdiction": {
+            "type": "string",
+            "description": "辖区"
+          },
+          "landUse": {
+            "type": "integer",
+            "description": "土地用途",
+            "format": "int32"
+          },
+          "latitude": {
+            "type": "string",
+            "description": "纬度"
+          },
+          "longitude": {
+            "type": "string",
+            "description": "经度"
+          },
+          "procinstId": {
+            "type": "string",
+            "description": "审批id"
+          },
+          "projectId": {
+            "type": "integer",
+            "description": "项目id",
+            "format": "int64"
+          },
+          "propertyRightNo": {
+            "type": "string",
+            "description": "产权证号"
+          },
+          "propertyType": {
+            "type": "string",
+            "description": "产权性质（填自有或租赁）"
+          },
+          "receiveDeptId": {
+            "type": "integer",
+            "description": "接收部门",
+            "format": "int64"
+          },
+          "registerType": {
+            "type": "string",
+            "description": "登记类型（填事业、民非或企业）"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "runType": {
+            "type": "string",
+            "description": "运营方式（填公建民营或民营）"
+          },
+          "setUpDate": {
+            "type": "string",
+            "description": "立项日期",
+            "format": "date"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "开始日期",
+            "format": "date"
+          },
+          "state": {
+            "type": "integer",
+            "description": "公建设施状态",
+            "format": "int32"
+          },
+          "street": {
+            "type": "string",
+            "description": "乡（镇、街道）"
+          },
+          "totalArea": {
+            "type": "number",
+            "description": "面积",
+            "format": "bigdecimal"
+          },
+          "transferContractNo": {
+            "type": "string",
+            "description": "出让合同号"
+          }
+        }
+      },
+      "ObFacilityVerifyAddParam": {
+        "title": "ObFacilityVerifyAddParam",
+        "required": [
+          "facilityId"
+        ],
+        "type": "object",
+        "properties": {
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "suggest": {
+            "type": "string",
+            "description": "核验建议"
+          }
+        }
+      },
+      "ObFacilityVerifyBO": {
+        "title": "ObFacilityVerifyBO",
+        "required": [
+          "createUser",
+          "facilityId",
+          "id",
+          "suggest"
+        ],
+        "type": "object",
+        "properties": {
+          "createUser": {
+            "type": "string",
+            "description": "创建人"
+          },
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "suggest": {
+            "type": "string",
+            "description": "核验建议"
+          }
+        }
+      },
+      "ObProjectBO": {
+        "title": "ObProjectBO",
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "developerId": {
+            "type": "integer",
+            "description": "关联开发商id",
+            "format": "int64"
+          },
+          "developerName": {
+            "type": "string",
+            "description": "关联开发商名称"
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "landName": {
+            "type": "string",
+            "description": "地块名称"
+          },
+          "projectName": {
+            "type": "string",
+            "description": "项目名称"
+          }
+        }
+      },
+      "ObProjectListBO": {
+        "title": "ObProjectListBO",
+        "type": "object",
+        "properties": {
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "developerId": {
+            "type": "integer",
+            "description": "关联开发商id",
+            "format": "int64"
+          },
+          "developerName": {
+            "type": "string",
+            "description": "关联开发商名称"
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "landName": {
+            "type": "string",
+            "description": "地块名称"
+          },
+          "projectName": {
+            "type": "string",
+            "description": "项目名称"
+          }
+        }
+      },
+      "ObProjectSaveDTO": {
+        "title": "ObProjectSaveDTO",
+        "required": [
+          "developerId",
+          "projectName"
+        ],
+        "type": "object",
+        "properties": {
+          "developerId": {
+            "type": "integer",
+            "description": "关联开发商id",
+            "format": "int64",
+            "example": 1
+          },
+          "landName": {
+            "type": "string",
+            "description": "地块名称",
+            "example": "大地块"
+          },
+          "projectName": {
+            "type": "string",
+            "description": "项目名称",
+            "example": "重大项目"
+          }
+        }
+      },
+      "ObProjectUpdateDTO": {
+        "title": "ObProjectUpdateDTO",
+        "required": [
+          "id",
+          "projectName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64",
+            "example": 1
+          },
+          "landName": {
+            "type": "string",
+            "description": "地块名称",
+            "example": "大地块"
+          },
+          "projectName": {
+            "type": "string",
+            "description": "项目名称",
+            "example": "重大项目"
+          }
+        }
+      },
+      "PageResult«ObProjectListBO»": {
+        "title": "PageResult«ObProjectListBO»",
+        "type": "object",
+        "properties": {
+          "currentPage": {
+            "type": "integer",
+            "description": "当前页-废弃",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/ObProjectListBO"
+            }
+          },
+          "pageNum": {
+            "type": "integer",
+            "description": "页码，从1开始",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "页面大小",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "description": "总页数-废弃",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "description": "总条数",
+            "format": "int64"
+          }
+        }
+      },
+      "PageResult«公建设施列表实体类»": {
+        "title": "PageResult«公建设施列表实体类»",
+        "type": "object",
+        "properties": {
+          "currentPage": {
+            "type": "integer",
+            "description": "当前页-废弃",
+            "format": "int32"
+          },
+          "list": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/公建设施列表实体类"
+            }
+          },
+          "pageNum": {
+            "type": "integer",
+            "description": "页码，从1开始",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "description": "页面大小",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "description": "总页数-废弃",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "description": "总条数",
+            "format": "int64"
+          }
+        }
+      },
+      "ResponseResult«List«ObCompanyListBO»»": {
+        "title": "ResponseResult«List«ObCompanyListBO»»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "返回数据",
+            "items": {
+              "$ref": "#/components/schemas/ObCompanyListBO"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«List«ObFacilityFileBO»»": {
+        "title": "ResponseResult«List«ObFacilityFileBO»»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "返回数据",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFileBO"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«List«ObFacilityInquestBO»»": {
+        "title": "ResponseResult«List«ObFacilityInquestBO»»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "返回数据",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityInquestBO"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«List«SysDept»»": {
+        "title": "ResponseResult«List«SysDept»»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "返回数据",
+            "items": {
+              "$ref": "#/components/schemas/SysDept"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«List«建设方案»»": {
+        "title": "ResponseResult«List«建设方案»»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "返回数据",
+            "items": {
+              "$ref": "#/components/schemas/建设方案"
+            }
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«ObCompanyBO»": {
+        "title": "ResponseResult«ObCompanyBO»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/ObCompanyBO"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«ObFacilityCheckResultLatestBO»": {
+        "title": "ResponseResult«ObFacilityCheckResultLatestBO»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/ObFacilityCheckResultLatestBO"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«ObFacilityFileBO»": {
+        "title": "ResponseResult«ObFacilityFileBO»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/ObFacilityFileBO"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«ObFacilityHandoverBO»": {
+        "title": "ResponseResult«ObFacilityHandoverBO»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/ObFacilityHandoverBO"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«ObFacilityHandoverInnerBO»": {
+        "title": "ResponseResult«ObFacilityHandoverInnerBO»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/ObFacilityHandoverInnerBO"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«ObFacilityInquestBO»": {
+        "title": "ResponseResult«ObFacilityInquestBO»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/ObFacilityInquestBO"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«ObFacilityRentInfoBO»": {
+        "title": "ResponseResult«ObFacilityRentInfoBO»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/ObFacilityRentInfoBO"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«ObFacilityVerifyBO»": {
+        "title": "ResponseResult«ObFacilityVerifyBO»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/ObFacilityVerifyBO"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«ObProjectBO»": {
+        "title": "ResponseResult«ObProjectBO»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/ObProjectBO"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«PageResult«ObProjectListBO»»": {
+        "title": "ResponseResult«PageResult«ObProjectListBO»»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/PageResult«ObProjectListBO»"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«PageResult«公建设施列表实体类»»": {
+        "title": "ResponseResult«PageResult«公建设施列表实体类»»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/PageResult«公建设施列表实体类»"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«Void»": {
+        "title": "ResponseResult«Void»",
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«int»": {
+        "title": "ResponseResult«int»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "integer",
+            "description": "返回数据",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«long»": {
+        "title": "ResponseResult«long»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "integer",
+            "description": "返回数据",
+            "format": "int64"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«object»": {
+        "title": "ResponseResult«object»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "description": "返回数据"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«string»": {
+        "title": "ResponseResult«string»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "description": "返回数据"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«公建数量统计»": {
+        "title": "ResponseResult«公建数量统计»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/公建数量统计"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«公建设施实体类»": {
+        "title": "ResponseResult«公建设施实体类»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/公建设施实体类"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«建设方案»": {
+        "title": "ResponseResult«建设方案»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/建设方案"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«建设需求»": {
+        "title": "ResponseResult«建设需求»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/建设需求"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "ResponseResult«验收记录»": {
+        "title": "ResponseResult«验收记录»",
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "返回数据",
+            "$ref": "#/components/schemas/验收记录"
+          },
+          "message": {
+            "type": "string",
+            "description": "返回消息"
+          },
+          "status": {
+            "type": "string",
+            "description": "返回状态:00000-表示成功，99999-失败,40001-登录过期,40003-无权限"
+          }
+        }
+      },
+      "SysDept": {
+        "title": "SysDept",
+        "required": [
+          "contact",
+          "contactPhone",
+          "deptName",
+          "id",
+          "leader",
+          "sort",
+          "status",
+          "zzdDeptId",
+          "zzdParentId"
+        ],
+        "type": "object",
+        "properties": {
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SysDept"
+            }
+          },
+          "contact": {
+            "type": "string",
+            "description": "联系人"
+          },
+          "contactPhone": {
+            "type": "string",
+            "description": "联系电话"
+          },
+          "createBy": {
+            "type": "integer",
+            "description": "创建者",
+            "format": "int64"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "deptName": {
+            "type": "string",
+            "description": "部门名称"
+          },
+          "id": {
+            "type": "integer",
+            "description": "部门id",
+            "format": "int64"
+          },
+          "leader": {
+            "type": "integer",
+            "description": "部门主管",
+            "format": "int64"
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SysUser"
+            }
+          },
+          "orgId": {
+            "type": "integer",
+            "description": "机构id",
+            "format": "int64"
+          },
+          "sort": {
+            "type": "integer",
+            "description": "显示顺序",
+            "format": "int32"
+          },
+          "status": {
+            "type": "integer",
+            "description": "部门状态",
+            "format": "int32"
+          },
+          "updateBy": {
+            "type": "integer",
+            "description": "更新者",
+            "format": "int64"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间",
+            "format": "date-time"
+          },
+          "validFlag": {
+            "type": "integer",
+            "description": "是否有效",
+            "format": "int32"
+          },
+          "zzdDeptId": {
+            "type": "string",
+            "description": "浙政钉部门id"
+          },
+          "zzdParentId": {
+            "type": "string",
+            "description": "浙政钉父部门id"
+          }
+        }
+      },
+      "SysUser": {
+        "title": "SysUser",
+        "required": [
+          "email",
+          "gender",
+          "id",
+          "nickname",
+          "phone",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "appid": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "createBy": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "delFlag": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "email": {
+            "type": "string",
+            "description": "邮箱"
+          },
+          "gender": {
+            "type": "integer",
+            "description": "性别",
+            "format": "int32"
+          },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "loginDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "loginIp": {
+            "type": "string"
+          },
+          "nickname": {
+            "type": "string",
+            "description": "名称"
+          },
+          "orgId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机"
+          },
+          "remark": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "updateBy": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "username": {
+            "type": "string",
+            "description": "账号"
+          },
+          "validFlag": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "SysUserBO": {
+        "title": "SysUserBO",
+        "required": [
+          "avatar",
+          "email",
+          "gender",
+          "genderName",
+          "id",
+          "loginDate",
+          "loginIp",
+          "nickname",
+          "phone",
+          "status",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "avatar": {
+            "type": "string",
+            "description": "头像地址",
+            "example": "http://localhost:8080/api/profile/1e846d38-5d24-4c8b-8adb-ec394109bae7.jpg"
+          },
+          "deptName": {
+            "type": "string",
+            "description": "部门名称"
+          },
+          "email": {
+            "type": "string",
+            "description": "用户邮箱",
+            "example": "12342345@163.com"
+          },
+          "gender": {
+            "type": "integer",
+            "description": "用户性别（0男 1女 2未知）",
+            "format": "int32",
+            "example": 0
+          },
+          "genderName": {
+            "type": "integer",
+            "description": "用户性别",
+            "format": "int32"
+          },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64",
+            "example": 1
+          },
+          "loginDate": {
+            "type": "string",
+            "description": "最后登录时间",
+            "format": "date-time"
+          },
+          "loginIp": {
+            "type": "string",
+            "description": "最后登录IP",
+            "example": "127.0.0.0"
+          },
+          "nickname": {
+            "type": "string",
+            "description": "用户昵称",
+            "example": "张三"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号码",
+            "example": "13723493450"
+          },
+          "status": {
+            "type": "integer",
+            "description": "帐号状态（0正常 1停用）",
+            "format": "int32",
+            "example": 0
+          },
+          "username": {
+            "type": "string",
+            "description": "用户账号",
+            "example": "GE_de8f5160ea284da4b1ssg3453sdfg4fe9"
+          }
+        }
+      },
+      "公建数量统计": {
+        "title": "公建数量统计",
+        "type": "object",
+        "properties": {
+          "beComplete": {
+            "type": "integer",
+            "description": "待完善",
+            "format": "int32"
+          },
+          "total": {
+            "type": "integer",
+            "description": "总数",
+            "format": "int32"
+          }
+        }
+      },
+      "公建设施列表实体类": {
+        "title": "公建设施列表实体类",
+        "required": [
+          "currentNode",
+          "endTime",
+          "facilityName",
+          "id",
+          "landUse",
+          "landUseName",
+          "receiveDept",
+          "receiveDeptId",
+          "setUpDate",
+          "startTime",
+          "state",
+          "stateName"
+        ],
+        "type": "object",
+        "properties": {
+          "currentNode": {
+            "type": "string",
+            "description": "当前节点"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "结束时间"
+          },
+          "facilityName": {
+            "type": "string",
+            "description": "公建设施名称"
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "landUse": {
+            "type": "integer",
+            "description": "土地用途",
+            "format": "int32"
+          },
+          "landUseName": {
+            "type": "string",
+            "description": "土地用途名称"
+          },
+          "receiveDept": {
+            "description": "接收部门",
+            "$ref": "#/components/schemas/SysDept"
+          },
+          "receiveDeptId": {
+            "type": "integer",
+            "description": "接收部门id",
+            "format": "int64"
+          },
+          "setUpDate": {
+            "type": "string",
+            "description": "立项日期",
+            "format": "date"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "开始时间"
+          },
+          "state": {
+            "type": "integer",
+            "description": "公建设施状态",
+            "format": "int32"
+          },
+          "stateName": {
+            "type": "string",
+            "description": "公建设施状态名称"
+          }
+        }
+      },
+      "公建设施实体类": {
+        "title": "公建设施实体类",
+        "required": [
+          "address",
+          "bedNum",
+          "checkDate",
+          "circulateDept",
+          "circulateDeptId",
+          "cityName",
+          "communityRecordNo",
+          "contactPeople",
+          "contactPhone",
+          "countyName",
+          "createBy",
+          "createTime",
+          "currentNode",
+          "developer",
+          "developerId",
+          "elevatorType",
+          "endDate",
+          "endTime",
+          "facilityName",
+          "facilityType",
+          "facilityTypeName",
+          "floorNo",
+          "handoverDate",
+          "id",
+          "institutionType",
+          "jurisdiction",
+          "landUse",
+          "landUseName",
+          "latitude",
+          "longitude",
+          "procinstId",
+          "projectId",
+          "projectName",
+          "propertyRightNo",
+          "propertyType",
+          "receiveDept",
+          "receiveDeptId",
+          "registerType",
+          "remark",
+          "runType",
+          "setUpDate",
+          "startDate",
+          "startTime",
+          "state",
+          "stateName",
+          "street",
+          "totalArea",
+          "transferContractNo",
+          "updateBy",
+          "updateTime",
+          "validFlag"
+        ],
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "公建地址"
+          },
+          "bedNum": {
+            "type": "integer",
+            "description": "床位数（张）",
+            "format": "int32"
+          },
+          "checkDate": {
+            "type": "string",
+            "description": "验收日期",
+            "format": "date"
+          },
+          "circulateDept": {
+            "description": "流转部门",
+            "$ref": "#/components/schemas/SysDept"
+          },
+          "circulateDeptId": {
+            "type": "integer",
+            "description": "流转部门id",
+            "format": "int64"
+          },
+          "cityName": {
+            "type": "string",
+            "description": "市"
+          },
+          "communityRecordNo": {
+            "type": "string",
+            "description": "小区备案号"
+          },
+          "contactPeople": {
+            "type": "string",
+            "description": "联系人"
+          },
+          "contactPhone": {
+            "type": "string",
+            "description": "联系电话"
+          },
+          "countyName": {
+            "type": "string",
+            "description": "县（市）"
+          },
+          "createBy": {
+            "type": "integer",
+            "description": "创建人",
+            "format": "int64"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "currentNode": {
+            "type": "string",
+            "description": "当前节点"
+          },
+          "developer": {
+            "description": "开发商",
+            "$ref": "#/components/schemas/ObCompanyBO"
+          },
+          "developerId": {
+            "type": "integer",
+            "description": "开发商id",
+            "format": "int64"
+          },
+          "elevatorType": {
+            "type": "string",
+            "description": "电梯（填有或无）"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "截止日期",
+            "format": "date"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "结束时间"
+          },
+          "facilityName": {
+            "type": "string",
+            "description": "公建设施名称"
+          },
+          "facilityType": {
+            "type": "integer",
+            "description": "公建设施类型id",
+            "format": "int32"
+          },
+          "facilityTypeName": {
+            "type": "string",
+            "description": "公建设施类型"
+          },
+          "floorNo": {
+            "type": "string",
+            "description": "楼层"
+          },
+          "handoverDate": {
+            "type": "string",
+            "description": "移交日期",
+            "format": "date"
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "institutionType": {
+            "type": "string",
+            "description": "机构性质（填公办或民办）"
+          },
+          "jurisdiction": {
+            "type": "string",
+            "description": "辖区"
+          },
+          "landUse": {
+            "type": "integer",
+            "description": "土地用途",
+            "format": "int32"
+          },
+          "landUseName": {
+            "type": "string",
+            "description": "土地用途名称"
+          },
+          "latitude": {
+            "type": "string",
+            "description": "纬度"
+          },
+          "longitude": {
+            "type": "string",
+            "description": "经度"
+          },
+          "procinstId": {
+            "type": "string",
+            "description": "审批id"
+          },
+          "projectId": {
+            "type": "integer",
+            "description": "项目id",
+            "format": "int64"
+          },
+          "projectName": {
+            "type": "string",
+            "description": "项目名称"
+          },
+          "propertyRightNo": {
+            "type": "string",
+            "description": "产权证号"
+          },
+          "propertyType": {
+            "type": "string",
+            "description": "产权性质（填自有或租赁）"
+          },
+          "receiveDept": {
+            "description": "接收部门",
+            "$ref": "#/components/schemas/SysDept"
+          },
+          "receiveDeptId": {
+            "type": "integer",
+            "description": "接收部门id",
+            "format": "int64"
+          },
+          "registerType": {
+            "type": "string",
+            "description": "登记类型（填事业、民非或企业）"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "runType": {
+            "type": "string",
+            "description": "运营方式（填公建民营或民营）"
+          },
+          "setUpDate": {
+            "type": "string",
+            "description": "立项日期",
+            "format": "date"
+          },
+          "startDate": {
+            "type": "string",
+            "description": "开始日期",
+            "format": "date"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "开始时间"
+          },
+          "state": {
+            "type": "integer",
+            "description": "公建设施状态",
+            "format": "int32"
+          },
+          "stateName": {
+            "type": "string",
+            "description": "公建设施状态名称"
+          },
+          "street": {
+            "type": "string",
+            "description": "乡（镇、街道）"
+          },
+          "sysUser": {
+            "description": "用户信息",
+            "$ref": "#/components/schemas/SysUserBO"
+          },
+          "totalArea": {
+            "type": "number",
+            "description": "面积",
+            "format": "bigdecimal"
+          },
+          "transferContractNo": {
+            "type": "string",
+            "description": "出让合同号"
+          },
+          "updateBy": {
+            "type": "integer",
+            "description": "更新人",
+            "format": "int64"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间",
+            "format": "date-time"
+          },
+          "validFlag": {
+            "type": "integer",
+            "description": "是否有效，1表示有效，0表示无效",
+            "format": "int32"
+          }
+        }
+      },
+      "审批实例启动参数": {
+        "title": "审批实例启动参数",
+        "required": [
+          "procdefId",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "flowVal": {
+            "type": "string",
+            "description": "流程变量"
+          },
+          "nodeList": {
+            "type": "string",
+            "description": "流程节点"
+          },
+          "procdefId": {
+            "type": "string",
+            "description": "流程定义的Id",
+            "example": "1"
+          },
+          "title": {
+            "type": "string",
+            "description": "标题",
+            "example": "张三的请假单"
+          }
+        }
+      },
+      "建设方案": {
+        "title": "建设方案",
+        "required": [
+          "content",
+          "createBy",
+          "createTime",
+          "developer",
+          "facilityId",
+          "files",
+          "id",
+          "name",
+          "projectName",
+          "remark",
+          "updateBy",
+          "updateTime",
+          "validFlag",
+          "writeDate"
+        ],
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "详细内容"
+          },
+          "createBy": {
+            "type": "integer",
+            "description": "创建人",
+            "format": "int64"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "developer": {
+            "type": "string",
+            "description": "开发商名称"
+          },
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "files": {
+            "type": "array",
+            "description": "附件",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFile"
+            }
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "建设方案名称"
+          },
+          "projectName": {
+            "type": "string",
+            "description": "项目名称"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "updateBy": {
+            "type": "integer",
+            "description": "更新人",
+            "format": "int64"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间",
+            "format": "date-time"
+          },
+          "validFlag": {
+            "type": "integer",
+            "description": "是否有效，1表示有效，0表示无效",
+            "format": "int32"
+          },
+          "writeDate": {
+            "type": "string",
+            "description": "填写日期",
+            "format": "date"
+          }
+        }
+      },
+      "建设需求": {
+        "title": "建设需求",
+        "required": [
+          "buildNeed",
+          "content",
+          "createBy",
+          "createTime",
+          "facilityId",
+          "facilityType",
+          "facilityTypeName",
+          "files",
+          "id",
+          "remark",
+          "updateBy",
+          "updateTime",
+          "useDept",
+          "useDeptId",
+          "validFlag",
+          "writeBy",
+          "writeByUser",
+          "writeDate"
+        ],
+        "type": "object",
+        "properties": {
+          "buildNeed": {
+            "type": "string",
+            "description": "建设需求"
+          },
+          "content": {
+            "type": "string",
+            "description": "需求内容"
+          },
+          "createBy": {
+            "type": "integer",
+            "description": "创建人",
+            "format": "int64"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "facilityType": {
+            "type": "integer",
+            "description": "公建设施类型id",
+            "format": "int32"
+          },
+          "facilityTypeName": {
+            "type": "string",
+            "description": "公建设施类型"
+          },
+          "files": {
+            "type": "array",
+            "description": "附件",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFile"
+            }
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "updateBy": {
+            "type": "integer",
+            "description": "更新人",
+            "format": "int64"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间",
+            "format": "date-time"
+          },
+          "useDept": {
+            "description": "使用部门",
+            "$ref": "#/components/schemas/SysDept"
+          },
+          "useDeptId": {
+            "type": "integer",
+            "description": "使用部门id",
+            "format": "int64"
+          },
+          "validFlag": {
+            "type": "integer",
+            "description": "是否有效，1表示有效，0表示无效",
+            "format": "int32"
+          },
+          "writeBy": {
+            "type": "integer",
+            "description": "录入人员id",
+            "format": "int64"
+          },
+          "writeByUser": {
+            "description": "录入人员",
+            "$ref": "#/components/schemas/SysUser"
+          },
+          "writeDate": {
+            "type": "string",
+            "description": "填写日期",
+            "format": "date"
+          }
+        }
+      },
+      "批量新增公建设施参数类": {
+        "title": "批量新增公建设施参数类",
+        "type": "object",
+        "properties": {
+          "param": {
+            "type": "array",
+            "description": "公建设施列表",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityAddParam"
+            }
+          }
+        }
+      },
+      "验收记录": {
+        "title": "验收记录",
+        "required": [
+          "createBy",
+          "createTime",
+          "facilityId",
+          "files",
+          "id",
+          "result",
+          "updateBy",
+          "updateTime",
+          "validFlag"
+        ],
+        "type": "object",
+        "properties": {
+          "createBy": {
+            "type": "integer",
+            "description": "创建人",
+            "format": "int64"
+          },
+          "createTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "facilityId": {
+            "type": "integer",
+            "description": "公建设施id",
+            "format": "int64"
+          },
+          "files": {
+            "type": "array",
+            "description": "附件",
+            "items": {
+              "$ref": "#/components/schemas/ObFacilityFile"
+            }
+          },
+          "id": {
+            "type": "integer",
+            "description": "主键id",
+            "format": "int64"
+          },
+          "result": {
+            "type": "integer",
+            "description": "验收结果（合格，不合格）",
+            "format": "int32"
+          },
+          "updateBy": {
+            "type": "integer",
+            "description": "更新人",
+            "format": "int64"
+          },
+          "updateTime": {
+            "type": "string",
+            "description": "更新时间",
+            "format": "date-time"
+          },
+          "validFlag": {
+            "type": "integer",
+            "description": "是否有效，1表示有效，0表示无效",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}
